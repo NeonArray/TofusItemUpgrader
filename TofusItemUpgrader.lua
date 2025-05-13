@@ -58,8 +58,6 @@ end
 
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_LOGIN")
-f:RegisterEvent("BAG_UPDATE")
 f:SetScript("OnEvent", function()
     PaperDollFrame:HookScript("OnShow", TofusItemUpgrader.AddMarksToEquippedItems)
-    ContainerFrameCombinedBags:HookScript("OnShow", TofusItemUpgrader.AddMarksToBagItems)
 end)
