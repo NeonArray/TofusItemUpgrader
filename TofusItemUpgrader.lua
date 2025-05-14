@@ -1,8 +1,14 @@
 
 TofusItemUpgrader = {}
 
-function TofusItemUpgrader:IsItemUpgradable(slotID)
-    local i = ItemLocation:CreateFromEquipmentSlot(slotID)
+function TofusItemUpgrader:IsItemUpgradable(slotIndex)
+    local itemLink = GetInventoryItemLink("player", slotIndex)
+
+    if not itemLink or not string.find(itemLink, "item:%d") then
+        return false
+    end
+
+    local i = ItemLocation:CreateFromEquipmentSlot(slotIndex)
     if i or i:IsValid() then
         if next(i) == nil then
             return false
@@ -56,7 +62,7 @@ function TofusItemUpgrader:MarkEquipmentAtSlot(slot)
     upgradeMe:SetDrawLayer("OVERLAY", 5)
 end
 
-local f = CreateFrame("Frame")
+local f = CreateFrame("Frame", "TofusItemUpgrader", UIParent)
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function()
     PaperDollFrame:HookScript("OnShow", TofusItemUpgrader.AddMarksToEquippedItems)
