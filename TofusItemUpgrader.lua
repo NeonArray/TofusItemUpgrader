@@ -1,5 +1,6 @@
+local _, addon = ...
 
-TofusItemUpgrader = {}
+addon.TofusItemUpgrader = {}
 
 function TofusItemUpgrader:IsItemUpgradable(slotIndex)
     local itemLink = GetInventoryItemLink("player", slotIndex)
